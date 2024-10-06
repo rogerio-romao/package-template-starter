@@ -21,13 +21,20 @@
         "dist"
     ],
     "type": "module",
+    "main": "dist/index.js",
     "devDependencies": {
+        "@arethetypeswrong/cli": "^0.16.2",
         "prettier": "^3.3.3",
-        "typescript": "^5.5.4"
+        "typescript": "^5.5.4",
+        "vitest": "^2.1.2"
     },
     "scripts": {
         "build": "tsc",
         "format": "prettier --write .",
-        "ci": "npm run build"
+        "check-format": "prettier --check .",
+        "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+        "dev": "vitest",
+        "test": "vitest run",
+        "ci": "npm run build && npm run check-format && npm run check-exports && npm run test"
     }
 }
